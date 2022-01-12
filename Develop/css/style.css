@@ -1,0 +1,76 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    width: 100vw;
+    height: 100vh;
+}
+main {
+    width: 100vw;
+    height: 100vh; 
+}
+button:hover {
+    cursor: pointer;
+}
+li {
+    list-style: none;
+}
+
+#header {
+    width: 100%;
+    background: linear-gradient(45deg, rgb(30, 76, 201), rgb(56, 12, 112));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#header-title {
+    color: white;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+}
+
+#search-for-a-city-container {
+    width: 25%;
+    height:100%;
+    font-size: 1.2rem;
+}
+#search-for-a-city-container div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#city-search-title-container {
+    color: blue;
+    height: 5%;
+}
+#city-search-form-container {
+    width: 100%;
+    display: block;
+    
+}
+#city-search-form {
+    width: 100%;
+    font-size: 1.2rem;
+}
+#city-search-submit-button {
+    width: 100%;
+    background:rgb(30, 76, 201);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-size: 1.2rem;
+}
+
+#saved-searches-container {
+    margin-top: 2%;
+    height: 100%;
+    width: 100%; 
+    background: rgb(231, 229, 229); 
+}
+.saved-search {
+    text-align: center;
+    padding-top: 5%;
+}
