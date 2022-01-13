@@ -20,13 +20,12 @@ function getCity() {
 // Function to get the weather data
 function getData(url) {
     // fetch the url
-    console.log(url);
     fetch(url)
     .then(function(response) {
        if (response.ok) {
         response.json()
         .then(function(data) {
-            console.log(data);
+            displayData(data);
         });
         let savedSeaches = document.getElementById("saved-searches-container");
         let newSave = document.createElement("li");
@@ -35,6 +34,16 @@ function getData(url) {
         newSave.textContent = city_name;
        }
     });
+}
+
+// Function to handle displaying the data
+function displayData(weatherData) {
+    // Get the useful information from the data
+    let mainData = weatherData.main.feels_like;
+    let name = weatherData.name;
+    console.log(weatherData);
+    console.log(mainData);
+    console.log(name);
 }
 
 // Main function to handle execution
