@@ -38,12 +38,23 @@ function getData(url) {
 
 // Function to handle displaying the data
 function displayData(weatherData) {
+    // Get the elements to be assigned values
+    let todaysWeatherTitle = document.getElementById("todays-weather-title")
+    let temperature = document.getElementById("temp");
+    let wind = document.getElementById("wind");
+    let humidity = document.getElementById("humidity");
+    
     // Get the useful information from the data
-    let mainData = weatherData.main.feels_like;
+    let currentTemp = weatherData.main.feels_like;
     let name = weatherData.name;
-    console.log(weatherData);
-    console.log(mainData);
-    console.log(name);
+    let windSpeed = weatherData.wind.speed;
+    let currentHumidity = weatherData.main.humidity;
+
+    // Assign the text content of the html to the values from the api
+    todaysWeatherTitle.textContent = name;
+    temperature.textContent = "Temperature: " + currentTemp;
+    wind.textContent = "Wind: " + windSpeed;
+    humidity.textContent = "Humidity: " + currentHumidity;
 }
 
 // Main function to handle execution
