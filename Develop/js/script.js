@@ -1,5 +1,5 @@
 let city_name = "";
-let API_KEY = "";
+let API_KEY = "3e577ad9e250c4dd28d83578156049cc";
 
 let api = `api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${API_KEY}`
 
@@ -14,7 +14,6 @@ function getCity() {
         // save city name to city name variable
         city_name = cityInput.value;
         cityInput.value = "";
-        console.log(city_name);
     });
 }
 
