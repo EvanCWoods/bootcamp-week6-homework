@@ -25,7 +25,21 @@ function getData(url) {
        if (response.ok) {
         response.json()
         .then(function(data) {
-            displayData(data);
+            function getCity(data) {
+                console.log(data);
+                let latitude = data.coord.lat;
+                let longitude = data.coord.lon;
+                let cityUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
+                fetch(cityUrl)
+                .then(function(response) {
+                    response.json()
+                    .then(function(data) {
+                        console.log(data);
+                    });
+                });
+            }
+            getCity(data);
+            // displayData(data);
         });
         let savedSeaches = document.getElementById("saved-searches-container");
         let newSave = document.createElement("li");
@@ -43,6 +57,8 @@ function displayData(weatherData) {
     let temperature = document.getElementById("temp");
     let wind = document.getElementById("wind");
     let humidity = document.getElementById("humidity");
+
+    console.log(weatherData);
     
     // Get the useful information from the data
     let currentTemp = weatherData.main.feels_like;
