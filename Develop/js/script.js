@@ -36,6 +36,7 @@ function getData(url) {
                 .then(function(response) {
                     response.json()
                     .then(function(data) {
+                        getForecast(data);
                         displayData(data);
                     });
                 });
@@ -68,8 +69,6 @@ function displayData(weatherData) {
     let wind = document.getElementById("wind");
     let humidity = document.getElementById("humidity");
     let uvIndex = document.getElementById("uvi");
-
-    console.log(weatherData);
     
     // Get the useful information from the data
     let currentTemp = weatherData.current.feels_like;
@@ -85,14 +84,45 @@ function displayData(weatherData) {
 }
 
 // Function to get and display the 5 day forecast in the displayData() function 
-function getForecast() {
+function getForecast(data) {
+    // get the card from the DOM'
+    let forecastContainer = document.getElementById("forecast-container");
+    forecastContainer.innerHTML = "";
     // Get the next 5 days
+    for (let i=0; i<5; i++) {
+        let forecastCard = document.createElement("div");
+        forecastCard.classList.add("forecast-card");
+        forecastContainer.appendChild(forecastCard);
+        // get the date for each day
+        let dateTime = new Date(data.daily[i].dt * 1000).toLocaleString();
+        dateTime = dateTime.split(",");
+        dateTime = dateTime[0];
+        let forecastDate = document.createElement("h1");
+        forecastDate.classList.add("forecast-date");
+        forecastDate.textContent = dateTime;
+        forecastCard.appendChild(forecastDate);
+        // get the temperature for each day
+        let temperature = data.daily[i].feels_like.day;
+        let forecastTemperature = document.createElement("p");
+        forecastTemperature.textContent = "Temperature: " + temperature;
+        forecastCard.appendChild(forecastTemperature);
+        forecastTemperature.classList.add("forecast-temperature");
+        // get the wind for each day
+        let wind = data.daily[i].wind_speed;
+        let forecastWind = document.createElement("p");
+        forecastWind.textContent = "Wind: " + wind;
+        forecastCard.appendChild(forecastWind);
+        forecastWind.classList.add("forecast-wind");
+        // get the humidity for each day
+        let humidity = data.daily[i].humidity;
+        let forecastHumidity = document.createElement("p");
+        forecastHumidity.textContent = "Humidity: " + humidity;
+        forecastCard.appendChild(forecastHumidity);
+        forecastHumidity.classList.add("forecast-humidity");
+    }
     // get the date for each day
     // get the icons
-    // get the temperature for each day
-    // get the wind for each day
-    // get the humidity for each day
-
+    console.log(data);
     // add each day to a card to be displayed at the bottom of the page
 }
 

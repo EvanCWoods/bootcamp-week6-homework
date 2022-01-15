@@ -99,3 +99,19 @@ li {
 .todays-info {
     margin-top: 10%;
 }
+
+#forecast-container {
+    position: relative;
+    top: 50%;
+    display: flex;
+}
+.forecast-card {
+    border: 1px solid grey;
+    text-align: center;
+}
+.forecast-date,
+.forecast-temperature,
+.forecast-wind,
+.forecast-humidity {
+    padding-top: 25%;
+}
