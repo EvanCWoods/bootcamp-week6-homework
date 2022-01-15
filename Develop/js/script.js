@@ -84,6 +84,18 @@ function displayData(weatherData) {
     uvIndex.textContent = "UV Index: " + uvi;
 }
 
+// Function to get and display the 5 day forecast in the displayData() function 
+function getForecast() {
+    // Get the next 5 days
+    // get the date for each day
+    // get the icons
+    // get the temperature for each day
+    // get the wind for each day
+    // get the humidity for each day
+
+    // add each day to a card to be displayed at the bottom of the page
+}
+
 // Function to save searches to local storage
 function saveToStorage(cityName) {
     localStorage.setItem(`${cityName}`, cityName);
