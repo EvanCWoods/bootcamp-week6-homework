@@ -2,19 +2,19 @@ let city_name = "";
 let API_KEY = "3e577ad9e250c4dd28d83578156049cc";
 
 
-// Function to handle getting user input to the city seasrch field
-function getCity() {
-    // Get the input element
+let cityButton = document.getElementById("city-search-submit-button");
+cityButton.addEventListener("click", function() {
     let cityInput = document.getElementById("city-search-form");
-    let cityButton = document.getElementById("city-search-submit-button");
-    // button click event to save the input element text content
-    cityButton.addEventListener("click", function() {
-        // save city name to city name variable
-        city_name = cityInput.value;
-        let api_url = `https://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${API_KEY}`
-        cityInput.value = "";
-        getData(api_url);
-    });
+    city_name = cityInput.value;
+    getCity(cityInput.value);
+    cityInput.value = "";
+});
+
+// Function to handle getting user input to the city seasrch field
+function getCity(city) {
+    // save city name to city name variable
+    let api_url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
+    getData(api_url);
 }
 
 // Function to get the weather data
@@ -36,21 +36,30 @@ function getData(url) {
                 .then(function(response) {
                     response.json()
                     .then(function(data) {
-                        console.log(data);
                         displayData(data);
                     });
                 });
             }
             getCity(data);
         });
-        let savedSeaches = document.getElementById("saved-searches-container");
-        let newSave = document.createElement("li");
-        newSave.classList.add("saved-search");
-        savedSeaches.appendChild(newSave);
-        newSave.textContent = city_name;
+        if (city_name != "") {
+            createSavedList(city_name);
+        }
        }
     });
 }
+
+function createSavedList(value) {
+    let savedSeaches = document.getElementById("saved-searches-container");
+    let newSave = document.createElement("li");
+    let savedButton = document.createElement("button");
+    newSave.classList.add("saved-search");
+    savedButton.classList.add("savedButton");
+    savedSeaches.appendChild(newSave);
+    newSave.appendChild(savedButton);
+    savedButton.textContent = value;
+    saveToStorage(value);
+};
 
 // Function to handle displaying the data
 function displayData(weatherData) {
@@ -75,9 +84,29 @@ function displayData(weatherData) {
     uvIndex.textContent = "UV Index: " + uvi;
 }
 
+// Function to save searches to local storage
+function saveToStorage(cityName) {
+    localStorage.setItem(`${cityName}`, cityName);
+}
+
+// Function to loop through all 
+function getStorage() {
+    for (let i=0; i<localStorage.length; i++) {
+        createSavedList(localStorage.getItem(localStorage.key(i)));
+    }
+}
+
+
+// Get data from local storage to search again on click
+let buttonWrapper = document.getElementById("saved-searches-container");
+buttonWrapper.addEventListener("click", function(event) {
+    let reSearchCity = localStorage.getItem(event.target.textContent);
+    getCity(reSearchCity);
+})
+
 // Main function to handle execution
 function main() {
-    getCity();
+    getStorage();
 }
 
 main();
