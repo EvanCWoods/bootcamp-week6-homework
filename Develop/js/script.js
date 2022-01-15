@@ -26,7 +26,9 @@ function getData(url) {
         response.json()
         .then(function(data) {
             function getCity(data) {
-                console.log(data);
+                let todaysWeatherTitle = document.getElementById("todays-weather-title");
+                let name = data.name;
+                todaysWeatherTitle.textContent = name;
                 let latitude = data.coord.lat;
                 let longitude = data.coord.lon;
                 let cityUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
@@ -35,11 +37,11 @@ function getData(url) {
                     response.json()
                     .then(function(data) {
                         console.log(data);
+                        displayData(data);
                     });
                 });
             }
             getCity(data);
-            // displayData(data);
         });
         let savedSeaches = document.getElementById("saved-searches-container");
         let newSave = document.createElement("li");
@@ -53,24 +55,24 @@ function getData(url) {
 // Function to handle displaying the data
 function displayData(weatherData) {
     // Get the elements to be assigned values
-    let todaysWeatherTitle = document.getElementById("todays-weather-title")
     let temperature = document.getElementById("temp");
     let wind = document.getElementById("wind");
     let humidity = document.getElementById("humidity");
+    let uvIndex = document.getElementById("uvi");
 
     console.log(weatherData);
     
     // Get the useful information from the data
-    let currentTemp = weatherData.main.feels_like;
-    let name = weatherData.name;
-    let windSpeed = weatherData.wind.speed;
-    let currentHumidity = weatherData.main.humidity;
+    let currentTemp = weatherData.current.feels_like;
+    let windSpeed = weatherData.current.wind_speed;
+    let currentHumidity = weatherData.current.humidity;
+    let uvi = weatherData.current.uvi;
 
     // Assign the text content of the html to the values from the api
-    todaysWeatherTitle.textContent = name;
     temperature.textContent = "Temperature: " + currentTemp;
     wind.textContent = "Wind: " + windSpeed;
     humidity.textContent = "Humidity: " + currentHumidity;
+    uvIndex.textContent = "UV Index: " + uvi;
 }
 
 // Main function to handle execution
