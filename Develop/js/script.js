@@ -26,12 +26,13 @@ function getData(url) {
         response.json()
         .then(function(data) {
             function getCity(data) {
+                console.log(data);
                 let todaysWeatherTitle = document.getElementById("todays-weather-title");
                 let name = data.name;
                 todaysWeatherTitle.textContent = name;
                 let latitude = data.coord.lat;
                 let longitude = data.coord.lon;
-                let cityUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
+                let cityUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`
                 fetch(cityUrl)
                 .then(function(response) {
                     response.json()
