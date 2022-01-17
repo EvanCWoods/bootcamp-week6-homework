@@ -170,10 +170,4 @@ buttonWrapper.addEventListener("click", function(event) {
     let reSearchCity = localStorage.getItem(event.target.textContent);
     getCity(reSearchCity);
 })
-
-// Main function to handle execution
-function main() {
-    getStorage();
-}
-
-main();
+getStorage();
