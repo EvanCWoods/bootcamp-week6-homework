@@ -25,7 +25,7 @@ function getData(url) {
        if (response.ok) {
         response.json()
         .then(function(data) {
-            function getCity(data) {
+            function getCityData(data) {
                 console.log(data);
                 let todaysWeatherTitle = document.getElementById("todays-weather-title");
                 let name = data.name;
@@ -50,7 +50,7 @@ function getData(url) {
                     });
                 });
             }
-            getCity(data);
+            getCityData(data);
         });
         if (city_name != "") {
             createSavedList(city_name);
