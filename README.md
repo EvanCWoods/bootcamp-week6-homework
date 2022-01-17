@@ -10,5 +10,14 @@ The UV index rating in the current day window is color coded by uv v alue. If ht
 After searching for a city, it gets stored in localStorage by the city name and added to a clickable list of searches. This allows the user to view any city that they have searched for i nthe past, recalling the data and viewing the forecast. Any search for the same city as one that already exists in local storage is not added to storage (already has a button in the saved searches list), but the data is still retrieved for users to view.
 
 
+# Testing Instructions:
+
+1. Type a city
+2. Press the submit button
+3. reopeat for as many cities as you want
+4. reload the page
+5. Click on any saved city
+6. view the forecast for the selected city
+
 The page is hosted using GitHub Pages and is viewable at this URL:
 https://evancwoods.github.io/bootcamp-week6-homework/
