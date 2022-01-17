@@ -45,7 +45,6 @@ li {
 }
 #city-search-title-container {
     color: blue;
-    height: 5%;
 }
 #city-search-form-container {
     width: 100%;
@@ -85,6 +84,13 @@ li {
 }
 #todays-weather-title-container {
     width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#today-img {
+    display: none;
+    height: 50px;
+    width: 50px;
 }
 #todays-weather-title {
     text-align: center;
@@ -93,25 +99,42 @@ li {
     margin-bottom: 10%;
 }
 #todays-weather-information {
-    height: 70%;
+    height: auto;
     margin-left: 5%;
+    line-height: 1.5rem;
 }
-.todays-info {
-    margin-top: 10%;
+#uv-index {
+    padding-left: 3%;
+    padding-right: 3%;
+    border-radius: 5px;
 }
-
 #forecast-container {
     position: relative;
     top: 50%;
     display: flex;
+    justify-content: space-between;
 }
 .forecast-card {
     border: 1px solid grey;
     text-align: center;
+    width: 17%;
+    margin: 1%;
+    background: rgb(49, 49, 136);
+    color: white;
+    border-radius: 5px;
 }
 .forecast-date,
 .forecast-temperature,
 .forecast-wind,
 .forecast-humidity {
-    padding-top: 25%;
+    line-height: 2rem;
+    font-size: 0.6rem;
+}
+
+.forecast-icon {
+    width: 20%;
+    height: 20%;
+}
+.forecast-humidity {
+    padding-bottom: 25%;
 }

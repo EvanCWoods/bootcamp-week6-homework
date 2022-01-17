@@ -29,12 +29,16 @@
         <section id="todays-weather-container">
             <div id="todays-weather-title-container">
                 <h3 id="todays-weather-title">City</h3>
+                <img id="today-img" src="" alt="">
             </div>
             <div id="todays-weather-information">
                 <p class="todays-info" id="temp">Temperature: </p>
                 <p class="todays-info" id="wind">Wind: </p>
                 <p class="todays-info" id="humidity">Humidity: </p>
-                <p class="todays-info" id="uvi">UV Index: </p>
+                <div class="todays-info" id="uvi">
+                    <span>UV Index: </span>
+                    <span id="uv-index"></span>
+                </div>
             </div>
 
             <section id="forecast-container"></section>

@@ -29,7 +29,7 @@ function getData(url) {
                 console.log(data);
                 let todaysWeatherTitle = document.getElementById("todays-weather-title");
                 let name = data.name;
-                todaysWeatherTitle.textContent = name;
+                todaysWeatherTitle.textContent = name
                 let latitude = data.coord.lat;
                 let longitude = data.coord.lon;
                 let cityUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`
@@ -37,6 +37,14 @@ function getData(url) {
                 .then(function(response) {
                     response.json()
                     .then(function(data) {
+                        let dateTime = new Date(data.current.dt * 1000).toLocaleString();
+                        dateTime = dateTime.split(",");
+                        dateTime = dateTime[0];
+                        let currentIcon = document.getElementById("today-img");
+                        let icon = data.current.weather[0].icon;
+                        currentIcon.src = `http://openweathermap.org/img/wn/${icon}@2x.png`
+                        todaysWeatherTitle.textContent = name + " (" + dateTime + ") ";
+                        currentIcon.style.display = "block";
                         getForecast(data);
                         displayData(data);
                     });
@@ -69,7 +77,8 @@ function displayData(weatherData) {
     let temperature = document.getElementById("temp");
     let wind = document.getElementById("wind");
     let humidity = document.getElementById("humidity");
-    let uvIndex = document.getElementById("uvi");
+    let uvIndex = document.getElementById("uv-index")
+
     
     // Get the useful information from the data
     let currentTemp = weatherData.current.feels_like;
@@ -78,10 +87,19 @@ function displayData(weatherData) {
     let uvi = weatherData.current.uvi;
 
     // Assign the text content of the html to the values from the api
-    temperature.textContent = "Temperature: " + currentTemp;
-    wind.textContent = "Wind: " + windSpeed;
-    humidity.textContent = "Humidity: " + currentHumidity;
-    uvIndex.textContent = "UV Index: " + uvi;
+    temperature.textContent = "Temperature: " + currentTemp + " C";
+    wind.textContent = "Wind: " + windSpeed + " KM/H";
+    humidity.textContent = "Humidity: " + currentHumidity + " %";
+    uvIndex.textContent = uvi;
+
+    // Filter color codes based on UV value
+    if (uvi <= 4 ) {
+        uvIndex.style.background = "green";
+    } else if (uvi > 4 && uvi <= 8) {
+        uvIndex.style.background = "yellow";
+    } else {
+        uvIndex.style.background = "red";
+    }
 }
 
 // Function to get and display the 5 day forecast in the displayData() function 
@@ -102,22 +120,28 @@ function getForecast(data) {
         forecastDate.classList.add("forecast-date");
         forecastDate.textContent = dateTime;
         forecastCard.appendChild(forecastDate);
+        // Get the icon for the weather
+        let icon = data.daily[i].weather[0].icon;
+        let forecastIcon = document.createElement("img");
+        forecastIcon.classList.add("forecast-icon");
+        forecastIcon.src = `http://openweathermap.org/img/wn/${icon}@2x.png`
+        forecastCard.appendChild(forecastIcon);
         // get the temperature for each day
         let temperature = data.daily[i].feels_like.day;
         let forecastTemperature = document.createElement("p");
-        forecastTemperature.textContent = "Temperature: " + temperature;
+        forecastTemperature.textContent = "Temperature: " + temperature + " C";
         forecastCard.appendChild(forecastTemperature);
         forecastTemperature.classList.add("forecast-temperature");
         // get the wind for each day
         let wind = data.daily[i].wind_speed;
         let forecastWind = document.createElement("p");
-        forecastWind.textContent = "Wind: " + wind;
+        forecastWind.textContent = "Wind: " + wind + " KM/H";
         forecastCard.appendChild(forecastWind);
         forecastWind.classList.add("forecast-wind");
         // get the humidity for each day
         let humidity = data.daily[i].humidity;
         let forecastHumidity = document.createElement("p");
-        forecastHumidity.textContent = "Humidity: " + humidity;
+        forecastHumidity.textContent = "Humidity: " + humidity + "%";
         forecastCard.appendChild(forecastHumidity);
         forecastHumidity.classList.add("forecast-humidity");
     }
